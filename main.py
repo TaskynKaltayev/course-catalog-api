@@ -12,8 +12,16 @@ def read_root():
 
 
 @app.get("/courses", response_model=list[Course])
-def list_courses():
-    return get_all_courses()
+def list_courses(is_elective: bool | None = None, sort: str = "popular"):
+    courses = get_all_courses()
+
+    if is_elective is not None:
+        courses = [course for course in courses if course.is_elective == is_elective]
+
+    if sort == "title":
+        return sorted(courses, key=lambda course: course.title)
+
+    return sorted(courses, key=lambda course: course.likes, reverse=True)
 
 
 @app.get("/courses/{course_id}", response_model=Course)
