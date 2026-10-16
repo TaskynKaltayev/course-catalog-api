@@ -64,7 +64,7 @@ never computes the offset.
 | `GET /courses?page=4&page_size=2` | `[]` |
 | `GET /courses/web-security` | 200, one course object |
 | `GET /courses/nope` | 404, `{"detail": "Course not found"}` |
-| `GET /docs`, `GET /redoc` | both open; `/docs` lists exactly three routes and the `Course` schema |
+| `GET /docs`, `GET /redoc` | both open; `/docs` lists every route and the `Course` schema |
 
 ## Data
 
