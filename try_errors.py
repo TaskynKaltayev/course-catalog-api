@@ -2,7 +2,6 @@ import httpx
 
 BASE = "http://localhost:8000"
 
-# (description, path, request body, expected status)
 CASES = [
     ("email already taken", "/students",
      {"name": "Aigerim Two", "email": "aigerim@example.com"}, 409),
