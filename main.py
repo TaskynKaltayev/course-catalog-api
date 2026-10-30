@@ -64,6 +64,7 @@ def read_root():
 def list_courses(
     db: SessionDep,
     is_elective: bool | None = None,
+    level: str | None = None,
     sort: str = "popular",
     p: dict = Depends(pagination),
 ):
@@ -71,6 +72,9 @@ def list_courses(
 
     if is_elective is not None:
         stmt = stmt.where(Course.is_elective == is_elective)
+
+    if level is not None:
+        stmt = stmt.where(Course.level == level)
 
     if sort == "title":
         stmt = stmt.order_by(Course.title)
