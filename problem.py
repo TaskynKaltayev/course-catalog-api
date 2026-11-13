@@ -1,5 +1,3 @@
-"""REST: translating errors into the Problem Details format (RFC 9457)."""
-
 from http import HTTPStatus
 
 from fastapi import FastAPI, Request

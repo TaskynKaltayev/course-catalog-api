@@ -38,13 +38,11 @@ def parse_id(value: strawberry.ID) -> int:
 
 
 def should_mask(error: GraphQLError) -> bool:
-    """Hide unexpected exceptions; our GraphQLError and query errors stay visible."""
     original = error.original_error
     return original is not None and not isinstance(original, GraphQLError)
 
 
 def batch_loader(db: Session, column, many: bool = False) -> DataLoader:
-    """Gathers keys in one pass and loads all rows with a single IN (...) query."""
     model = column.class_
 
     async def load(keys: list) -> list:
@@ -63,8 +61,6 @@ def batch_loader(db: Session, column, many: bool = False) -> DataLoader:
 
 
 class Context(BaseContext):
-    """Created per request: the session and loaders don't outlive the request."""
-
     def __init__(self, db: Session):
         super().__init__()
         self.db = db

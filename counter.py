@@ -1,5 +1,3 @@
-"""Measuring instrument: SQL queries per HTTP request (X-SQL-Queries header)."""
-
 from contextvars import ContextVar
 
 from fastapi import FastAPI, Request

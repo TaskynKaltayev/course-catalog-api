@@ -1,5 +1,3 @@
-"""Services layer: application rules without HTTP and without GraphQL."""
-
 from sqlalchemy import update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -18,8 +16,6 @@ CONSTRAINT_ERRORS = {
 
 
 class ServiceError(Exception):
-    """Expected error: carries a code that REST and GraphQL translate differently."""
-
     def __init__(self, code: str, message: str):
         super().__init__(message)
         self.code = code
