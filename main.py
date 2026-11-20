@@ -5,9 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+import auth
 import counter
 import problem
 import services
+from auth import CurrentUser
 from db import get_db
 from graphql_api import graphql_app
 from models import Course, Enrollment, Student
@@ -19,6 +21,7 @@ from schemas import (
     EnrollmentOut,
     StudentIn,
     StudentOut,
+    UserOut,
 )
 
 app = FastAPI(title="Course Catalog API")
@@ -35,6 +38,7 @@ app.add_middleware(
 
 SessionDep = Annotated[Session, Depends(get_db)]
 
+app.include_router(auth.router)
 app.include_router(graphql_app, prefix="/graphql")
 
 
@@ -61,6 +65,11 @@ def enrollment_details():
 @app.get("/")
 def read_root():
     return {"message": "Course Catalog API is running"}
+
+
+@app.get("/me", response_model=UserOut)
+def read_me(user: CurrentUser):
+    return user
 
 
 @app.get("/courses", response_model=list[CourseOut])
