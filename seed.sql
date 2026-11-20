@@ -1,6 +1,4 @@
--- seed.sql: initial data (the courses come from data.py in Labs 4 and 5)
--- The file can be run again: it clears the tables first. For the training database only!
-TRUNCATE enrollments, students, courses RESTART IDENTITY;
+TRUNCATE users, enrollments, students, courses RESTART IDENTITY;
 
 INSERT INTO courses (id, title, description, credits, is_elective, likes, level) VALUES
   ('modern-frontend', 'Modern Frontend: React & Next.js',
